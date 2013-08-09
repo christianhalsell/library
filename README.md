@@ -1,4 +1,4 @@
-1-OOP-Library
+1-Library
 =============
 
 Library created with OOP
