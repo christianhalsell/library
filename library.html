@@ -1,0 +1,90 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Library</title>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+</head>
+<body>
+
+<script type="text/javascript">
+//The Books
+function Book(title, enshelf, unshelf) {
+	this.title = title;
+	this.enshelf = enshelf;
+	this.unshelf = unshelf;
+}
+
+var bookA = new Book('The War of 1812',true,false);
+var bookB = new Book('Watership Down',false,true);
+var bookC = new Book('Sand Cake',true,false);
+var bookD = new Book('Ender\'s Game',true,false);
+
+var bookInventory = [bookA, bookB, bookC, bookD];
+
+//The Shelves
+function Shelf (shelfNumber, shelfName) {
+	this.shelfNumber = shelfNumber;
+	this.shelfName = shelfName;
+    this.books = [];
+    this.addBook = function(book) {
+        this.books[this.books.length] = book;
+    }
+}
+
+var shelf100 = new Shelf(100,'History');
+var shelf200 = new Shelf(200,'Fiction');
+var shelf300 = new Shelf(300,'Children\'s');
+
+var shelfInventory = [shelf100, shelf200, shelf300];
+
+//The library
+function Library(libraryName) {
+	this.LibraryName = libraryName;
+	this.shelves = [];
+    this.addShelf = function(shelf) {
+        this.shelves[this.shelves.length] = shelf;
+    }
+}
+
+var kcls = new Library('King County Library System');
+
+//Add shelves to library
+kcls.addShelf(shelf100);
+kcls.addShelf(shelf200);
+kcls.addShelf(shelf300);
+
+//Add book to the shelf
+shelf100.addBook(bookA);
+shelf200.addBook(bookB);
+shelf300.addBook(bookC);
+shelf200.addBook(bookD);
+
+var listAllBooks = function() {
+	for (i = 0; i < shelfInventory.length; i++) {
+		var name = shelfInventory[i];
+		for (j = 0; j < name.books.length; j++) {
+			console.log(name.books[j].title + "(" + name.shelfName + ")");
+		}
+	}
+}
+
+listAllBooks();
+
+var countAllBooks = function() {
+	total = 0;
+	for (i = 0; i < shelfInventory.length; i++) {
+		total = total + shelfInventory[i].books.length
+	}
+	return total;
+}
+
+//Count all the books in the library
+console.log("Total Number of Shelves: " + kcls.shelves.length)
+
+//Count all the books in the library
+console.log("Total Number of Books: " + countAllBooks());
+</script>
+
+</body>
+</html>
